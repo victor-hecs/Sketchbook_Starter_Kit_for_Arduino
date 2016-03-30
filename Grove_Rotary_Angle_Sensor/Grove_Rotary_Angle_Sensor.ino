@@ -1,4 +1,4 @@
-// demo of Starter Kit V2.0
+// A demo for Starter Kit V2.0
 
 
 const int potentiometer = A0;                    // rotary angle sensor connect to A0
