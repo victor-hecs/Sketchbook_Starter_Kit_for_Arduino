@@ -1,16 +1,26 @@
-// demo of Starter kit V2.0 - Grove - Light Sensor
-// when the value of light sensor ledd than a certain value
-// led will on, you can set this certain value via change thresholdvalue
-// such as when you cover light sensor with your hand, you'll find led on
+// A demo for Starter kit V2.0 - Grove - Light Sensor.
 
-const int pinLight = A0;
-const int pinLed   = 7;
+// Additional material required:
+// Grove - LED × 1 pc
 
-int thresholdvalue=400;                 //the threshold to turn on or off the LED
+// When the value of light sensor is lower than a threshold,
+// LED will light on.
+// You can set a specific light condition by modifying threshold to a appropriate value.
+// For example, the luminance for reading approximately range from 326-355 lux. You can modify 
+// threshold to 326, as luminance is luminance is less than 326 lux, the LED will light on. 
+
+// circuit:
+// Connect Grove-Light Sensor to analog pin A0.
+// Connect Grove - LED to digital port D7.
+
+const int pinLight = A0;                // Connect Grove-Light Sensor to analog pin A0;
+const int pinLed   = 7;                 // Connect Grove - LED to digital port D7
+
+int thresholdvalue = 400;                 //the threshold to turn on or off the LED
 
 void setup()
 {
-    pinMode(pinLed, OUTPUT);             //set the LED on Digital 12 as an OUTPUT
+    pinMode(pinLed, OUTPUT);             //set the LED on Digital 6 as an OUTPUT
 }
 
 void loop()
