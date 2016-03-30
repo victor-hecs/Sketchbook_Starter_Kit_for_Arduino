@@ -1,8 +1,17 @@
-// demo of Starter Kit V2.0 - Grove - Relay
-// when a button press, relay will on
+// A demo for Starter Kit V2.0 - Grove - Relay
+// As a button is pressed, relay will be switched on
 
-const int buttonPin = 3;     // the button is attached to digital pin 3
-const int relayPin =  9;     // the relay is attached to digital pin 9
+// Circuit:
+// Grove-Button is connected to digital pin 3
+// Grove-Relay is connected to digital pin 9
+
+// by victor at 03/30/2016
+// www.seeedstudio.com
+
+
+
+const int buttonPin = 3;     // the Grove-Button is connected to digital pin 3
+const int relayPin =  9;     // the Grove-Relay is connected to digital pin 9
 int buttonState = 0;
 
 void setup()
@@ -26,3 +35,4 @@ void loop()
     }
     delay(10);
 }
+
