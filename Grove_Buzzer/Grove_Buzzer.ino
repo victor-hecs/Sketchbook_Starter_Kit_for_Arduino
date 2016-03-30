@@ -1,78 +1,49 @@
-/* Melody
- * (cleft) 2005 D. Cuartielles for K3
- *
- * This example uses a piezo speaker to play melodies.  It sends
- * a square wave of the appropriate frequency to the piezo, generating
- * the corresponding tone.
- *
- * The calculation of the tones is made following the mathematical
- * operation:
- *
- *       timeHigh = period / 2 = 1 / (2 * toneFrequency)
- *
- * where the different tones are described as in the table:
- *
- * note  frequency  period  timeHigh
- * c          261 Hz          3830  1915
- * d          294 Hz          3400  1700
- * e          329 Hz          3038  1519
- * f          349 Hz          2864  1432
- * g          392 Hz          2550  1275
- * a          440 Hz          2272  1136
- * b          493 Hz          2028 1014
- * C         523 Hz         1912  956
- *
- * http://www.arduino.cc/en/Tutorial/Melody
+/*
+  Melody
+
+ Plays a melody
+
+ circuit:
+ * Connect Grove-Buzzer to digital port 8.
+
+
+
+This example code is in the public domain.
+
+ http://www.arduino.cc/en/Tutorial/Tone
+
  */
+#include "pitches.h"
 
-int speakerPin = 3;                  // Grove Buzzer connect to D3
+// notes in the melody:
+int melody[] = {
+  NOTE_C4, NOTE_G3, NOTE_G3, NOTE_A3, NOTE_G3, 0, NOTE_B3, NOTE_C4
+};
 
+// note durations: 4 = quarter note, 8 = eighth note, etc.:
+int noteDurations[] = {
+  4, 8, 8, 4, 4, 4, 4, 4
+};
 
-int length = 15; // the number of notes
-char notes[] = "ccggaagffeeddc "; // a space represents a rest
-int beats[] = { 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 2, 4 };
-int tempo = 300;
+void setup() {
+  // iterate over the notes of the melody:
+  for (int thisNote = 0; thisNote < 8; thisNote++) {
 
-void playTone(int tone, int duration) {
-    for (long i = 0; i < duration * 1000L; i += tone * 2) {
-        digitalWrite(speakerPin, HIGH);
-        delayMicroseconds(tone);
-        digitalWrite(speakerPin, LOW);
-        delayMicroseconds(tone);
-    }
+    // to calculate the note duration, take one second
+    // divided by the note type.
+    //e.g. quarter note = 1000 / 4, eighth note = 1000/8, etc.
+    int noteDuration = 1000 / noteDurations[thisNote];
+    tone(8, melody[thisNote], noteDuration);
+
+    // to distinguish the notes, set a minimum time between them.
+    // the note's duration + 30% seems to work well:
+    int pauseBetweenNotes = noteDuration * 1.30;
+    delay(pauseBetweenNotes);
+    // stop the tone playing:
+    noTone(8);
+  }
 }
 
-void playNote(char note, int duration) {
-    char names[] = { 'c', 'd', 'e', 'f', 'g', 'a', 'b', 'C' };
-    int tones[] = { 1915, 1700, 1519, 1432, 1275, 1136, 1014, 956 };
-
-    // play the tone corresponding to the note name
-    for (int i = 0; i < 8; i++) {
-        if (names[i] == note) {
-            playTone(tones[i], duration);
-        }
-    }
-}
-
-void setup()
-{
-    pinMode(speakerPin, OUTPUT);
-}
-
-void loop() 
-{
-    for (int i = 0; i < length; i++) 
-    {
-        if (notes[i] == ' ')
-        {
-            delay(beats[i] * tempo); // rest
-        }
-        else
-        {
-            playNote(notes[i], beats[i] * tempo);
-        }
-
-        // pause between notes
-        delay(tempo / 2);
-    }
+void loop() {
+  // no need to repeat the melody.
 }
