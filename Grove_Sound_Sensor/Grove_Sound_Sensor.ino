@@ -4,6 +4,10 @@
 // Circuit:
 // Connect Grove Sound Sensor to analog port A0;
 // Connect Grove-LED to digital port D7
+// 
+// by victor at 3/30/2016
+// www.seeedstudio.com 
+
 
 const int pinSound = A0;               // port connected to Sound Sensor
 const int pinLed   = 7;                // port connected to LED
