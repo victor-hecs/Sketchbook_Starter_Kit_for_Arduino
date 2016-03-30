@@ -1,20 +1,24 @@
-// demo of Starter Kit V2.0 - Grove Sound Sensor
+// A demo for Starter Kit V2.0 - Grove Sound Sensor
 // when sound larger than a certain value, led will on
+// 
+// Circuit:
+// Connect Grove Sound Sensor to analog port A0;
+// Connect Grove-LED to digital port D7
 
-const int pinSound = A0;               // pin of Sound Sensor
-const int pinLed   = 7;                // pin of LED
+const int pinSound = A0;               // port connected to Sound Sensor
+const int pinLed   = 7;                // port connected to LED
 
-int thresholdValue = 50;                 // the threshold to turn on or off the LED
+int threshold= 50;                 // the threshold to switch LED on and off
 
 void setup()
 {
-    pinMode(pinLed, OUTPUT);            //set the LED on Digital 12 as an OUTPUT
+    pinMode(pinLed, OUTPUT);            //set the LED on Digital 7 as an OUTPUT
 }
 
 void loop()
 {
-    int sensorValue = analogRead(pinSound);   //read the sensorValue on Analog 0
-    if(sensorValue>thresholdValue)
+    int sensorValue = analogRead(pinSound);   //read the sensorValue on Analog port A0
+    if(sensorValue > thresholdValue)
     digitalWrite(pinLed,HIGH);
     delay(200);
     digitalWrite(pinLed,LOW);
